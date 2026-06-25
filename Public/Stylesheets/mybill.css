@@ -1,0 +1,83 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:#f4f6f9;
+}
+
+.container{
+
+    width:95%;
+
+    max-width:900px;
+
+    margin:40px auto;
+}
+
+.bill-card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 4px 20px rgba(0,0,0,0.08);
+}
+
+.bill-card h1{
+
+    color:#0b3d91;
+
+    margin-bottom:25px;
+
+    text-align:center;
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+}
+
+td{
+
+    border:1px solid #ddd;
+
+    padding:14px;
+}
+
+td:first-child{
+
+    font-weight:bold;
+
+    width:40%;
+}
+
+.buttons{
+
+    margin-top:25px;
+
+    text-align:center;
+}
+
+.buttons a{
+
+    background:#0b3d91;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:12px 25px;
+
+    border-radius:10px;
+}

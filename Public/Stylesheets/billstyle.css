@@ -1,0 +1,108 @@
+/* Page background */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f5f7;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* LOGO */
+.Entry {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3px;
+}
+
+.Entry img {
+    max-height: 180px;
+    width: auto;
+    margin: 45px;
+}
+
+/* Main container */
+.bill-container {
+    text-align: center;
+    margin-top: 0px;
+}
+
+/* Heading */
+.bill-container h1 {
+    color: #1b3c2b;
+    margin-bottom: 30px;
+}
+
+/* Bill box */
+.bill-box {
+    width: 350px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+/* Text inside */
+.bill-box p {
+    font-size: 16px;
+    margin: 10px 10px;
+    margin-top: 5px;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.status:contains("Paid") {
+    color: rgb(11, 253, 11);
+}
+
+.status:contains("Unpaid") {
+    color: red;
+}
+
+/* Button */
+.back-btn {
+    margin-top: 25px;
+    padding: 10px 20px;
+    background: #1b3c2b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    background: #14532d;
+}
+
+.qr{
+    margin-top: auto;
+    justify-content: center;
+    
+    /* margin-bottom: auto; */
+}
+
+.pay-btn{
+  background-color: #1b4332;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: none;
+  margin-left: 125px;
+   cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: auto;
+
+}
+
+.pay-btn:hover {
+  background-color: #2d6a4f;
+}

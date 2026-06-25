@@ -1,0 +1,294 @@
+/* ================================
+   Help Page - Water Billing System
+   ================================ */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#eef7ff,#dff5ec);
+    color:#222;
+    min-height:100vh;
+}
+
+.wrapper{
+    width:95%;
+    max-width:1400px;
+    margin:auto;
+    padding:30px 0;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:25px;
+    background:#ffffff;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    margin-bottom:35px;
+}
+
+.logo img{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    object-fit:cover;
+    border:5px solid #f1f1f1;
+}
+
+.heading{
+    text-align:center;
+}
+
+.heading h1{
+    font-size:2.4rem;
+    color:#143d73;
+}
+
+.heading p{
+    font-size:1.2rem;
+    color:#444;
+    margin-top:5px;
+}
+
+.heading span{
+    display:inline-block;
+    margin-top:12px;
+    background:#e7f3ff;
+    color:#1565c0;
+    padding:8px 18px;
+    border-radius:25px;
+    font-size:14px;
+    font-weight:600;
+}
+
+/* ================= MAIN ================= */
+
+.container{
+    display:flex;
+    justify-content:center;
+    gap:35px;
+    flex-wrap:wrap;
+}
+
+/* ================= CARD ================= */
+
+.card{
+    background:#fff;
+    width:520px;
+    border-radius:18px;
+    padding:30px;
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+    transition:.35s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
+
+.card h2{
+    color:#0d47a1;
+    margin-bottom:20px;
+    font-size:1.6rem;
+}
+
+.card h2 i{
+    color:#2196f3;
+    margin-right:10px;
+}
+
+.card ol{
+    padding-left:25px;
+    line-height:2;
+}
+
+.card ol li{
+    margin-bottom:8px;
+}
+
+.card ul{
+    margin-top:8px;
+    padding-left:22px;
+}
+
+.card ul li{
+    line-height:1.8;
+}
+
+/* ================= CONTACT ================= */
+
+.info p{
+    margin:18px 0;
+    font-size:17px;
+}
+
+.info i{
+    width:28px;
+    color:#1565c0;
+}
+
+.info a{
+    text-decoration:none;
+    color:#1565c0;
+    font-weight:600;
+}
+
+.info a:hover{
+    text-decoration:underline;
+}
+
+/* ================= TIPS ================= */
+
+.tips{
+    margin-top:40px;
+    background:#fff;
+    border-radius:18px;
+    padding:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.tips h2{
+    color:#1565c0;
+    margin-bottom:18px;
+}
+
+.tips h2 i{
+    color:#ffc107;
+    margin-right:8px;
+}
+
+.tips ul{
+    list-style:none;
+}
+
+.tips li{
+    padding:12px 0;
+    border-bottom:1px solid #eee;
+    font-size:17px;
+}
+
+.tips li:last-child{
+    border-bottom:none;
+}
+
+/* ================= DISCLAIMER ================= */
+
+.disclaimer{
+    margin-top:35px;
+    background:#fff9e8;
+    border-left:6px solid orange;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.disclaimer h3{
+    color:#d35400;
+    margin-bottom:15px;
+}
+
+.disclaimer h3 i{
+    margin-right:8px;
+}
+
+.disclaimer p{
+    line-height:1.8;
+    margin-bottom:12px;
+}
+
+/* ================= BUTTON ================= */
+
+.back{
+    text-align:center;
+    margin:40px 0;
+}
+
+.back button{
+    border:none;
+    outline:none;
+    background:#1565c0;
+    color:#fff;
+    padding:15px 35px;
+    border-radius:50px;
+    font-size:17px;
+    cursor:pointer;
+    transition:.3s;
+    font-weight:600;
+}
+
+.back button:hover{
+    background:#0d47a1;
+    transform:translateY(-4px);
+    box-shadow:0 10px 20px rgba(0,0,0,.2);
+}
+
+.back i{
+    margin-right:8px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    margin-top:20px;
+    background:#143d73;
+    color:#fff;
+    text-align:center;
+    padding:22px;
+    border-radius:15px;
+    font-size:15px;
+    line-height:1.8;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1100px){
+
+.container{
+    flex-direction:column;
+    align-items:center;
+}
+
+.card{
+    width:95%;
+}
+
+}
+
+@media(max-width:768px){
+
+.header{
+    flex-direction:column;
+}
+
+.heading h1{
+    font-size:1.8rem;
+}
+
+.heading p{
+    font-size:1rem;
+}
+
+.logo img{
+    width:90px;
+    height:90px;
+}
+
+.card{
+    width:100%;
+    padding:20px;
+}
+
+.back button{
+    width:100%;
+}
+
+}

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="/Stylesheets/settings_admin.css">
+
+    <title> Settings</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                <img src="/images/water_drop.jpeg" alt="Water Billing Logo">
+                <h2>WaterBill</h2>
+            </div>
+
+            <ul>
+
+                <li onclick="location.href='/admin_dashboard'">
+                    <i class="fas fa-home"></i>
+                    Dashboard
+                </li>
+
+                <li onclick="location.href='/manage_Users'">
+                    <i class="fas fa-users"></i>
+                    Manage Users
+                </li>
+
+                <li onclick="location.href='/view_record'">
+                    <i class="fas fa-file-alt"></i>
+                    View Records
+                </li>
+
+                   <li onclick="location.href='#'">
+          <i class="fas fa-plus-circle"></i>
+          Add Data
+        </li>
+
+        <li onclick="location.href='#'">
+          <i class="fas fa-chart-bar"></i>
+          Reports
+        </li>
+
+
+                <li class="active">
+                    <i class="fas fa-cog"></i>
+                    Settings
+                </li>
+
+                <li onclick="location.href='/'">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </li>
+
+            </ul>
+
+        </aside>
+
+        <!-- MAIN CONTENT -->
+
+        <main class="main-content">
+
+            <div class="header">
+
+                <% if(typeof errorMessage !=='undefined' && errorMessage){ %>
+
+                    <div id="errorPopup" class="error-popup">
+                        <div class="error-content">
+
+                            <div class="error-icon">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+
+                            <h2>Update Failed</h2>
+
+                            <p>
+                                <%= errorMessage %>
+                            </p>
+
+                            <button onclick="closeErrorPopup()">
+                                OK
+                            </button>
+
+                        </div>
+                    </div>
+
+                    <% } %>
+
+
+
+
+                        <% if(typeof successMessage !=='undefined' && successMessage){ %>
+
+                            <div id="successPopup" class="success-popup">
+                                <div class="success-content">
+
+                                    <div class="success-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+
+                                    <h2>Settings Updated</h2>
+
+                                    <p>
+                                        Administrator details have been updated successfully.
+                                    </p>
+
+                                    <button onclick="closeSuccessPopup()">
+                                        OK
+                                    </button>
+
+                                </div>
+                            </div>
+
+                            <% } %>
+
+                                <h1>System Settings</h1>
+
+                                <p>
+                                     Water Billing Management System
+                                </p>
+
+            </div>
+
+
+            <div class="settings-grid">
+
+                <div class="settings-card">
+
+                    <h3>
+                        <i class="fas fa-user-shield"></i>
+                        Administrator Settings
+                    </h3>
+                    <form id="settingsForm" action="/admin/update-settings" method="POST">
+
+                        <label>Admin ID</label>
+                        <input type="text" name="adminId" value="<%= admin.adminId %>">
+
+                        <label>Admin Email</label>
+                        <input type="email" name="email" value="<%= admin.email %>">
+                        <label>Current Password</label>
+                        <input type="password" name="currentPassword">
+
+                        <label>New Password</label>
+                        <input type="password" name="newPassword">
+
+                        <label>Confirm Password</label>
+                        <input type="password" name="confirmPassword">
+
+                        <button type="button" onclick="openConfirmModal()">
+                            Save Changes
+                        </button>
+                    </form>
+
+                </div>
+
+                <div class="settings-card">
+
+                    <h3>
+                        <i class="fas fa-tint"></i>
+                        Billing Configuration
+                    </h3>
+
+                    <label>Water Rate Per Unit</label>
+                    <input type="number" value="10">
+
+                    <label>Late Payment Fine</label>
+                    <input type="number" value="50">
+
+                    <button>Save Settings</button>
+
+                </div>
+
+                <div class="settings-card">
+
+                    <h3>
+                        <i class="fas fa-server"></i>
+                        System Information
+                    </h3>
+
+                    <p><strong>Version:</strong> 1.0</p>
+                    <p><strong>Database:</strong> MongoDB</p>
+                    <p><strong>Status:</strong> Online</p>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h3>⚠ Confirm Changes</h3>
+
+            <p>
+                You are about to modify administrator settings.
+                This may affect future logins and system access.
+            </p>
+
+            <div class="modal-buttons">
+                <button onclick="submitSettingsForm()" class="confirm-btn">
+                    Yes, Save Changes
+                </button>
+
+                <button onclick="closeConfirmModal()" class="cancel-btn">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+        function openConfirmModal() {
+            document.getElementById("confirmModal").style.display = "flex";
+        }
+
+        function closeConfirmModal() {
+            document.getElementById("confirmModal").style.display = "none";
+        }
+
+        function submitSettingsForm() {
+            document.getElementById("settingsForm").submit();
+        }
+
+
+        function closeSuccessPopup() {
+            document.getElementById("successPopup").style.display = "none";
+        }
+
+        function closeErrorPopup() {
+            const popup = document.getElementById("errorPopup");
+
+            if (popup) {
+                popup.style.display = "none";
+            }
+        }
+
+
+    </script>
+
+</body>
+
+</html>

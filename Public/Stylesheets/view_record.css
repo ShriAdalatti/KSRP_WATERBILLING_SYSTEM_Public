@@ -1,0 +1,314 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:#f0f2f5;
+  color:#1a2744;
+  display:flex;
+  min-height:100vh;
+}
+/* ================= SIDEBAR ================= */
+.sidebar{
+    width:260px;
+    background:#0f2747;
+    color:white;
+    padding:20px;
+    position:fixed;
+    top:0;
+    left:0;
+    height:100vh;
+    overflow-y:auto;
+}
+.sidebar .active{
+    background:#2c5aa0;
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.logo img{
+    width:90px;
+    height:90px;
+    object-fit:contain;
+    margin-bottom:10px;
+}
+
+.logo h2{
+    font-size:24px;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar ul li{
+    padding:15px;
+    margin-bottom:10px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+    font-size:16px;
+}
+
+.sidebar ul li i{
+    margin-right:10px;
+}
+
+.sidebar ul li:hover{
+    background:#1f4d8f;
+}
+.sidebar .active{
+    background:#2c5aa0;
+}
+
+/* ================= MAIN CONTENT ================= */
+
+.main-wrap{
+    margin-left:250px;
+    width:calc(100% - 250px);
+    padding:25px;
+}
+
+/* ================= TOPBAR ================= */
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.topbar-title h1{
+    margin:0;
+    font-size: 30px;
+    color:#0d2342;
+}
+
+.topbar-title span{
+    color:#666;
+    font-size:15px;
+}
+
+.topbar-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+/* ================= SEARCH ================= */
+
+#searchInput{
+    padding:10px 15px;
+    width:280px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    outline:none;
+    background:white;
+}
+
+#searchInput:focus{
+    border-color:#2c5aa0;
+}
+
+/* ================= ADMIN BADGE ================= */
+
+.admin-badge{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.admin-avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#0d2342;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+}
+
+/* ================= PAGE HEADING ================= */
+
+.page-heading{
+    margin-bottom:25px;
+}
+
+.page-heading h2{
+    margin:0;
+    color:#0d2342;
+}
+
+.page-heading p{
+    margin-top:5px;
+    color:#666;
+}
+
+/* ================= STATS ================= */
+
+.stats-row{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.stat-card{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
+}
+
+.sc-icon{
+    font-size:28px;
+}
+
+.sc-label{
+    margin-top:10px;
+    color:#666;
+}
+
+.sc-val{
+    margin-top:10px;
+    font-size:28px;
+    font-weight:bold;
+    color:#0d2342;
+}
+
+/* ================= TABLE CARD ================= */
+
+.table-card{
+    background:white;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
+    overflow:hidden;
+}
+
+.table-card-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px;
+    border-bottom:1px solid #eee;
+}
+
+.table-card-head h3{
+    margin:0;
+    color:#0d2342;
+}
+
+.count-pill{
+    background:#eef4ff;
+    color:#2c5aa0;
+    padding:8px 15px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:600;
+}
+
+/* ================= TABLE ================= */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#2c5aa0;
+}
+
+thead th{
+    color:white;
+    padding:15px;
+    text-align:center;
+}
+
+tbody td{
+    padding:15px;
+    text-align:center;
+    border-bottom:1px solid #eee;
+}
+
+tbody tr:hover{
+    background:#f7fbff;
+}
+
+/* ================= STATUS ================= */
+
+.paid-badge{
+    background:#d4edda;
+    color:#155724;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.unpaid-badge{
+    background:#f8d7da;
+    color:#721c24;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+}
+
+/* ================= BUTTON ================= */
+
+.viewdetail{
+    border:none;
+    padding:8px 15px;
+    border-radius:6px;
+    background:#d1ecf1;
+    color:#0c5460;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.viewdetail:hover{
+    background:#3498db;
+    color:white;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1000px){
+
+    .stats-row{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .topbar{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+}
+
+@media(max-width:768px){
+
+    .sidebar{
+        display:none;
+    }
+
+    .main-wrap{
+        margin-left:0;
+        width:100%;
+    }
+
+    .stats-row{
+        grid-template-columns:1fr;
+    }
+
+    #searchInput{
+        width:100%;
+    }
+}

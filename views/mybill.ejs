@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>My Bill</title>
+
+<link rel="stylesheet"
+href="/Stylesheets/mybill.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="bill-card">
+
+        <h1>Water Bill Details</h1>
+
+        <table>
+
+            <tr>
+                <td>Bill ID</td>
+                <td><%= bill.billId %></td>
+            </tr>
+
+            <tr>
+                <td>Name</td>
+                <td><%= bill.name %></td>
+            </tr>
+
+            <tr>
+                <td>Email</td>
+                <td><%= bill.email %></td>
+            </tr>
+
+            <tr>
+                <td>Block</td>
+                <td><%= bill.block %></td>
+            </tr>
+
+            <tr>
+                <td>Room</td>
+                <td><%= bill.room %></td>
+            </tr>
+
+            <tr>
+                <td>Month</td>
+                <td><%= bill.month %></td>
+            </tr>
+
+            <tr>
+                <td>Previous Reading</td>
+                <td><%= bill.previousReading %></td>
+            </tr>
+
+            <tr>
+                <td>Current Reading</td>
+                <td><%= bill.currentReading %></td>
+            </tr>
+
+            <tr>
+                <td>Amount</td>
+                <td>₹<%= bill.amount %></td>
+            </tr>
+
+            <tr>
+                <td>Status</td>
+                <td><%= bill.status %></td>
+            </tr>
+
+        </table>
+
+<div class="buttons">
+
+    <% if(bill.status !== "Paid"){ %>
+
+        <a href="/paybill/<%= bill._id %>"
+        class="pay-btn">
+
+            Pay Bill
+
+        </a>
+
+    <% } %>
+</div>
+        <div class="buttons">
+
+            <a href="/Userhome">
+                Back
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

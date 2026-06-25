@@ -1,0 +1,538 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Water Bill Reports</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- Your stylesheet -->
+<link rel="stylesheet" href="/Stylesheets/reports.css">
+
+</head>
+<body>
+
+<div class="container">
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <button onclick="window.location.href='/admin_dashboard'" class="backbtn">
+        <i class="fa-solid fa-arrow-left"></i> Back
+      </button>
+      <h1>
+        <i class="fa-solid fa-droplet"></i>
+        Water Bill Reports
+      </h1>
+    </div>
+    <span class="top-bar-meta">Admin Panel &nbsp;·&nbsp; <span id="currentDate"></span></span>
+  </div>
+
+  <!-- GENERATE REPORT -->
+  <div class="card">
+    <div class="card-header">
+      <i class="fa-solid fa-sliders"></i>
+      <h2>Generate Report</h2>
+    </div>
+    <div class="filters">
+      <div class="input-group">
+        <label>Month</label>
+        <select id="month">
+          <option>January</option>
+          <option>February</option>
+          <option>March</option>
+          <option>April</option>
+          <option>May</option>
+          <option>June</option>
+          <option>July</option>
+          <option>August</option>
+          <option>September</option>
+          <option>October</option>
+          <option>November</option>
+          <option>December</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>Year</label>
+  <select id="year"></select>
+      </div>
+      <button class="generate-btn" onclick="generateReport()">
+        <i class="fa-solid fa-rotate"></i> Generate Report
+      </button>
+    </div>
+  </div>
+
+  <!-- STATS CARDS -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon blue"><i class="fa-solid fa-users"></i></div>
+      
+      <div class="stat-label">Total Consumers</div>
+      <div class="stat-value" id="totalUsersCount">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon purple"><i class="fa-solid fa-file-invoice"></i></div>
+      <div class="stat-label">Bills Generated</div>
+      <div class="stat-value" id="totalBills">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green"><i class="fa-solid fa-circle-check"></i></div>
+      <div class="stat-label">Paid Bills</div>
+      <div class="stat-value" id="paidBills">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon red"><i class="fa-solid fa-clock"></i></div>
+      <div class="stat-label">Unpaid Bills</div>
+      <div class="stat-value" id="unpaidBills">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon teal"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+      <div class="stat-label">Total Revenue</div>
+      <div class="stat-value" id="totalRevenue">₹0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon amber"><i class="fa-solid fa-hourglass-half"></i></div>
+      <div class="stat-label">Pending Revenue</div>
+      <div class="stat-value" id="pendingRevenue">₹0</div>
+    </div>
+  </div>
+
+  <!-- FILTER RECORDS -->
+  <div class="card">
+    <div class="card-header">
+      <i class="fa-solid fa-filter"></i>
+      <h2>Filter Records</h2>
+    </div>
+    <div class="search-row">
+      <div class="input-group">
+        <label>Search Name</label>
+        <input type="text" id="searchName" placeholder="Type a name…">
+      </div>
+      <div class="input-group" style="max-width:180px">
+        <label>Status</label>
+        <select id="statusFilter">
+          <option value="All">All Status</option>
+         <option value="Paid">Paid</option>
+<option value="Unpaid">Unpaid</option>
+<option value="Payment Verification Pending">
+    Verification Pending
+</option>
+        </select>
+      </div>
+      <button class="apply-btn" onclick="applyFilter()">
+        <i class="fa-solid fa-magnifying-glass"></i> Apply Filter
+      </button>
+    </div>
+  </div>
+
+  <!-- RECORD TABLE -->
+  <div class="card">
+    <div class="card-header">
+      <i class="fa-solid fa-table"></i>
+      <h2>Detailed Records</h2>
+    </div>
+    <div class="table-container">
+      <table id="reportTable">
+        <thead>
+          <tr>
+            <th style="width:50px">Sr No</th>
+            <th style="width:90px">Bill ID</th>
+            <th>Name</th>
+            <th style="width:80px">Block</th>
+            <th style="width:80px">Room</th>
+            <th>Email</th>
+<th>Previous Reading</th>
+<th>Current Reading</th>
+<th>Units</th>
+            <th style="width:90px">Month</th>
+            <th style="width:100px">Amount</th>
+            <th style="width:100px">Status</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr>
+            <td colspan="12">
+              <div class="empty-state">
+                <i class="fa-regular fa-file-lines"></i>
+                <p>Select a month &amp; year and click Generate Report</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination" id="pagination" style="display:none">
+      <span class="page-info" id="pageInfo">Showing 0 records</span>
+      <div class="page-btns">
+        <button class="page-btn" onclick="changePage(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="page-btn active" id="pageNum">1</button>
+        <button class="page-btn" onclick="changePage(1)"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTION BUTTONS -->
+  <div class="action-buttons">
+    <button id="printBtn" onclick="window.print()">
+      <i class="fa-solid fa-print"></i> Print Report
+    </button>
+    <button id="pdfBtn" onclick="exportPDF()">
+      <i class="fa-solid fa-file-pdf"></i> Export PDF
+    </button>
+    <button id="excelBtn" onclick="exportExcel()">
+      <i class="fa-solid fa-file-excel"></i> Export Excel
+    </button>
+  </div>
+
+  <!-- AI SECTION -->
+  <div class="card">
+    <div class="card-header">
+      <i class="fa-solid fa-wand-magic-sparkles"></i>
+      <h2>AI Report Assistant</h2>
+    </div>
+    <div class="ai-prompt-row">
+      <input type="text" id="aiInput" placeholder="Ask anything about your records…"
+             onkeydown="if(event.key==='Enter') askAI()">
+      <button class="ask-btn" onclick="askAI()">
+        <i class="fa-solid fa-paper-plane"></i> Ask AI
+      </button>
+    </div>
+    <div class="ai-result">
+      <div class="ai-result-label">Try asking</div>
+      <div class="chips">
+        <span class="chip" onclick="setAI('Show unpaid bills')">Show unpaid bills</span>
+        <span class="chip" onclick="setAI('Highest bill this month')">Highest bill this month</span>
+        <span class="chip" onclick="setAI('Total revenue')">Total revenue</span>
+        <span class="chip" onclick="setAI('Block wise records')">Block wise records</span>
+        <span class="chip" onclick="setAI('Pending consumers list')">Pending consumers</span>
+      </div>
+      <div id="aiOutput"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Your existing backend JS -->
+<script src="/Javascripts/reports.js"></script>
+
+<!-- Page JS -->
+<script>
+  fetch("/admin/total-users")
+.then(res => res.json())
+.then(data => {
+    document.getElementById("totalUsersCount").textContent =
+        data.totalUsers;
+});
+
+
+  /* ── Date in topbar ── */
+  document.getElementById('currentDate').textContent =
+    new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+
+  /* ── Set current month as default ── */
+  (function () {
+    const months = ['January','February','March','April','May','June',
+                    'July','August','September','October','November','December'];
+    document.getElementById('month').value = months[new Date().getMonth()];
+  })();
+
+  /* ── generateReport — replace demo array with your fetch() call ── */
+  async function generateReport(){
+
+    const month =
+    document.getElementById("month").value;
+
+    const year =
+    document.getElementById("year").value;
+
+    try{
+
+        const response =
+        await fetch(
+
+            `/admin/report-data?month=${month}&year=${year}`
+
+        );
+
+        const data =
+        await response.json();
+
+        window._allData = data;
+
+        renderTable(data);
+
+        updateStats(data);
+
+    }
+    catch(err){
+
+        console.log(err);
+
+        alert(
+            "Error loading report"
+        );
+
+    }
+
+}
+  /* ── Render table ── */
+  function renderTable(data) {
+    const tbody = document.getElementById('tableBody');
+    if (!data.length) {
+      tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state">
+        <i class="fa-regular fa-file-lines"></i><p>No records found</p></div></td></tr>`;
+      document.getElementById('pagination').style.display = 'none';
+      return;
+    }
+    tbody.innerHTML = data.map((r, i) => `
+      <tr>
+        <td>${i + 1}</td>
+        <td>${r.billId}</td>
+        <td>${r.name}</td>
+        <td>${r.block}</td>
+        <td>${r.room}</td>
+        <td>${r.month}</td>
+     <td>₹${Number(r.amount).toLocaleString('en-IN')}</td>
+        <td>
+          <span class="badge ${r.status === 'Paid' ? 'paid' : 'unpaid'}">
+
+    ${r.status}
+
+</span>
+        </td>
+      </tr>`).join('');
+    document.getElementById('pagination').style.display = 'flex';
+    document.getElementById('pageInfo').textContent =
+      `Showing ${data.length} record${data.length !== 1 ? 's' : ''}`;
+  }
+
+  /* ── Update stat cards ── */
+function updateStats(data){
+
+    const paid =
+    data.filter(
+        r => r.status === "Paid"
+    );
+
+    const unpaid =
+    data.filter(
+        r => r.status !== "Paid"
+    );
+
+    const totalRevenue =
+    paid.reduce(
+
+        (sum,r)=>
+
+        sum + Number(r.amount),
+
+        0
+
+    );
+
+    const pendingRevenue =
+    unpaid.reduce(
+
+        (sum,r)=>
+
+        sum + Number(r.amount),
+
+        0
+
+    );
+
+    document.getElementById(
+        "totalBills"
+    ).innerText =
+    data.length;
+
+    document.getElementById(
+        "paidBills"
+    ).innerText =
+    paid.length;
+
+    document.getElementById(
+        "unpaidBills"
+    ).innerText =
+    unpaid.length;
+
+    document.getElementById(
+        "totalRevenue"
+    ).innerText =
+    "₹" +
+    totalRevenue.toLocaleString(
+        "en-IN"
+    );
+
+    document.getElementById(
+        "pendingRevenue"
+    ).innerText =
+    "₹" +
+    pendingRevenue.toLocaleString(
+        "en-IN"
+    );
+
+}
+
+const yearSelect =
+document.getElementById("year");
+
+const currentYear =
+new Date().getFullYear();
+
+for(
+
+let y=currentYear-2;
+
+y<=currentYear+5;
+
+y++
+
+){
+
+    yearSelect.innerHTML +=
+    `<option value="${y}">
+        ${y}
+    </option>`;
+
+}
+
+yearSelect.value =
+currentYear;
+
+
+  /* ── Filter ── */
+  function applyFilter() {
+    if (!window._allData) return;
+    const name   = document.getElementById('searchName').value.toLowerCase();
+    const status = document.getElementById('statusFilter').value;
+    const filtered = window._allData.filter(r =>
+      (!name || r.name.toLowerCase().includes(name)) &&
+      (status === 'All' || r.status === status)
+    );
+    renderTable(filtered);
+  }
+
+  /* ── Pagination (wire to backend as needed) ── */
+  function changePage(dir) { /* TODO */ }
+
+  /* ── Export PDF ── */
+  function exportPDF() {
+    if (!window._allData || !window._allData.length) { alert('Generate a report first.'); return; }
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.setFontSize(16);
+    doc.text('Water Bill Report', 14, 20);
+    doc.setFontSize(10);
+    doc.text(`Generated: ${new Date().toLocaleDateString('en-IN')}`, 14, 28);
+    let y = 38;
+    const headers = ['Sr', 'Bill ID', 'Name', 'Block', 'Room', 'Month', 'Amount', 'Status'];
+    const colW    = [10, 22, 36, 16, 16, 22, 22, 20];
+    doc.setFillColor(26, 79, 189);
+    doc.rect(14, y - 5, 182, 8, 'F');
+    doc.setTextColor(255, 255, 255);
+    let x = 14;
+    headers.forEach((h, i) => { doc.text(h, x + 1, y); x += colW[i]; });
+    doc.setTextColor(0, 0, 0);
+    y += 7;
+    window._allData.forEach((r, idx) => {
+      if (idx % 2 === 0) { doc.setFillColor(248, 249, 253); doc.rect(14, y - 5, 182, 8, 'F'); }
+      x = 14;
+     const row = [
+ String(idx + 1),
+ r.billId,
+ r.name,
+ r.block,
+ r.room,
+ r.month,
+ '₹' + Number(r.amount),
+ r.status
+];
+      row.forEach((v, i) => { doc.setFontSize(9); doc.text(String(v), x + 1, y); x += colW[i]; });
+      y += 8;
+      if (y > 270) { doc.addPage(); y = 20; }
+    });
+    doc.save('water-bill-report.pdf');
+  }
+
+  /* ── Export Excel ── */
+  function exportExcel() {
+    if (!window._allData || !window._allData.length) { alert('Generate a report first.'); return; }
+    const ws = XLSX.utils.json_to_sheet(window._allData.map((r, i) => ({
+  'Sr No': i + 1,
+  'Bill ID': r.billId,
+  'Name': r.name,
+  'Email': r.email,
+  'Block': r.block,
+  'Room': r.room,
+  'Month': r.month,
+  'Year': r.year,
+  'Amount': r.amount,
+  'Status': r.status
+})));
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Report');
+    XLSX.writeFile(wb, 'water-bill-report.xlsx');
+  }
+
+  /* ── AI chip helper ── */
+  function setAI(text) {
+    document.getElementById('aiInput').value = text;
+    askAI();
+  }
+
+  /* ── AI (local data answers) ── */
+  function askAI() {
+    const q   = document.getElementById('aiInput').value.trim().toLowerCase();
+    const out = document.getElementById('aiOutput');
+    if (!q) return;
+    out.classList.add('visible');
+    if (!window._allData || !window._allData.length) {
+      out.innerHTML = '<i class="fa-solid fa-circle-info" style="color:var(--brand);margin-right:6px"></i>Generate a report first to get data-based answers.';
+      return;
+    }
+    const data = window._allData;
+    let answer = '';
+    if (q.includes('unpaid')) {
+      const u = data.filter(
+ r =>
+ r.status === 'Unpaid' ||
+ r.status === 'Payment Verification Pending'
+);
+      answer = `<strong>${u.length} unpaid bill(s):</strong><br>` +
+               u.map(r => `${r.name} — ₹${r.amount} (${r.block}/${r.room})`).join('<br>');
+    } else if (q.includes('highest')) {
+      const top = [...data]
+.sort((a, b) => Number(b.amount) - Number(a.amount))[0];
+      answer = `Highest bill: <strong>${top.name}</strong> — ₹${top.amount} (Block ${top.block}, Room ${top.room})`;
+    } else if (q.includes('revenue')) {
+      const total = data
+.filter(r => r.status === 'Paid')
+.reduce((s, r) => s + Number(r.amount), 0);
+      answer = `Total collected revenue: <strong>₹${total.toLocaleString('en-IN')}</strong>`;
+    } else if (q.includes('block')) {
+      const blocks = {};
+      data.forEach(r => { blocks[r.block] = (blocks[r.block] || 0) + 1; });
+      answer = 'Block-wise count:<br>' +
+               Object.entries(blocks).map(([b, c]) => `Block ${b}: ${c} consumer(s)`).join('<br>');
+    } else if (q.includes('pending')) {
+      const u = data.filter(r => r.status === 'Unpaid');
+      answer = `<strong>${u.length} pending consumer(s):</strong><br>` +
+               u.map(r => `${r.name} — ₹${r.amount}`).join('<br>');
+    } else {
+      answer = `I couldn't find a specific answer for "<em>${q}</em>". Try: "unpaid bills", "highest bill", "total revenue", or "block wise records".`;
+    }
+    out.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles" style="color:var(--brand);margin-right:6px"></i>${answer}`;
+  }
+</script>
+
+</body>
+</html>

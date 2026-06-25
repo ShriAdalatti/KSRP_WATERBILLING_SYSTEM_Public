@@ -1,0 +1,259 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:#eef2f8;
+
+    min-height:100vh;
+
+    padding:30px;
+}
+
+.container{
+
+    max-width:1400px;
+
+    margin:auto;
+}
+
+/* TOP */
+
+.topbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+}
+
+.topbar h1{
+
+    color:#0b3d91;
+
+    font-size:34px;
+}
+
+.topbar p{
+
+    color:#666;
+}
+
+.back-btn{
+
+    text-decoration:none;
+
+    background:#0b3d91;
+
+    color:white;
+
+    padding:12px 22px;
+
+    border-radius:12px;
+
+    font-weight:600;
+}
+
+/* SUMMARY */
+
+.summary-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin-bottom:30px;
+
+    text-align:center;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,0.08);
+}
+
+.summary-card h2{
+
+    color:#0b3d91;
+
+    font-size:42px;
+}
+
+.summary-card p{
+
+    color:#666;
+}
+
+/* GRID */
+
+.payment-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fill,minmax(350px,1fr));
+
+    gap:25px;
+}
+
+/* CARD */
+
+.payment-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:
+    0 6px 20px rgba(0,0,0,0.08);
+
+    transition:0.3s;
+}
+
+.payment-card:hover{
+
+    transform:
+    translateY(-5px);
+}
+
+.card-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+}
+
+.card-header h3{
+
+    color:#0b3d91;
+}
+
+.pending-badge{
+
+    background:#fff4db;
+
+    color:#ff9800;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+}
+
+.details p{
+
+    margin:12px 0;
+
+    color:#444;
+}
+
+/* BUTTONS */
+
+.actions{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-top:20px;
+}
+
+.actions form{
+
+    flex:1;
+}
+
+.approve-btn{
+
+    width:100%;
+
+    border:none;
+
+    background:#2e7d32;
+
+    color:white;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+}
+
+.reject-btn{
+
+    width:100%;
+
+    border:none;
+
+    background:#d32f2f;
+
+    color:white;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+}
+
+.approve-btn:hover{
+
+    background:#1b5e20;
+}
+
+.reject-btn:hover{
+
+    background:#b71c1c;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    body{
+
+        padding:15px;
+    }
+
+    .topbar{
+
+        flex-direction:column;
+
+        gap:15px;
+
+        align-items:flex-start;
+    }
+
+    .topbar h1{
+
+        font-size:28px;
+    }
+
+    .payment-grid{
+
+        grid-template-columns:1fr;
+    }
+
+}

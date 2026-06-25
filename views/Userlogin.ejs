@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="/Stylesheets/Userlogin.css" >
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <title> UserLogin</title>
+</head>
+<body>
+    <a href="/homepage" class="bck-btn">
+    <i class="fas fa-home"></i> Home
+</a>
+    <form action="/Userlogin" method="post">
+<div class="main-container">
+
+    <div class="Entry">
+       <img src="/images/water_drop.jpeg" alt="Water Billing Logo">
+    </div>
+
+    <div class="head">
+        <h1>3rd Battalion of the Karnataka State Reserve Police (KSRP) </h1>
+        <p>KSRP Block, Santhosapuram, Koramangala, Bengaluru, Karnataka 560034</p>
+        <P><b>This is a demonstration portal. No real transactions are processed.</b></P>
+    </div>
+
+    <div class="loginbox">
+    <h2>User Login</h2>
+<div class="field">
+    <label>Email:</label>
+
+    <input
+        type="email"
+        name="email"
+        placeholder="Enter email"
+        required>
+</div>
+
+<div class="field">
+
+    <label>Password:</label>
+
+    <div class="password-box">
+
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter password"
+            required>
+
+        <i
+            class="fas fa-eye"
+            id="togglePassword">
+        </i>
+
+    </div>
+
+</div>
+<div class="contact-admin">
+    <i class="fas fa-lock"></i>
+    Authorized users only. Contact the system administrator for account recovery.
+</div>
+    <button type="submit">Login</button>
+
+
+</div>
+</div>
+<div class="footer">
+        <footer>
+          © 2026 Water Billing Management System
+
+Academic & Demonstration Project
+        </footer>
+    </div>
+</form>
+<script>
+
+const password =
+document.getElementById("password");
+
+const togglePassword =
+document.getElementById("togglePassword");
+
+togglePassword.addEventListener("click",()=>{
+
+    if(password.type === "password"){
+
+        password.type = "text";
+
+        togglePassword.classList.remove("fa-eye");
+        togglePassword.classList.add("fa-eye-slash");
+
+    }else{
+
+        password.type = "password";
+
+        togglePassword.classList.remove("fa-eye-slash");
+        togglePassword.classList.add("fa-eye");
+    }
+
+});
+
+</script>
+</body>
+</html>
