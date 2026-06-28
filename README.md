@@ -23,12 +23,10 @@ The project helped me understand how a complete full-stack application is design
 ---
 
 # 💡 Why I Built This
+<p style="font-size: 16px">
+During a visit to the 3rd Battalion , <b>KSRP (Bengaluru)</b> with my brother, I noticed that residents had to visit the administrative office every month just to check their water bill and make the payment. At the same time, the staff maintained billing records manually, which made the overall process time-consuming and difficult to manage.
+This inspired me to build a web-based Water Billing Management System that allows administrators to manage residents and monthly bills digitally, while enabling residents to securely view their water bills online without having to visit the office just to check their bill. The project demonstrates how a simple digital solution can make everyday administrative tasks more efficient and user-friendly.
 
-During a visit to KSRP residential quarters with my brother, I noticed that water billing records were being managed manually.
-
-That inspired me to build a web application that demonstrates how the same process can be handled digitally, making it easier to manage residents, bills, and reports from a single platform.
-
----
 
 # ✨ Features
 
